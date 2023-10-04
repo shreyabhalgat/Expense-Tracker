@@ -15,7 +15,9 @@ category = st.selectbox("Category", ["Food", "Transportation", "Shopping", "Util
 amount = st.number_input("Amount (in your currency)", value=0.00, step=1.0)
 
 if st.button("Add Expense"):
-    expenses = expenses.append({"Date": date, "Category": category, "Amount": amount}, ignore_index=True)
+    new_expense = pd.DataFrame({"Date": [date], "Category": [category], "Amount": [amount]})
+    expenses = pd.concat([expenses, new_expense], ignore_index=True)
+
 
 # Display current expenses
 st.header("Your Expenses:")
